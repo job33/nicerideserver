@@ -1,6 +1,9 @@
-CREATE TABLE notes (
+CREATE TABLE rides (
   id serial primary key,
-  datetime timestamp with time zone NOT NULL,
-  title character varying(255) NOT NULL,
-  text text NOT NULL
+  rideFrom character varying(30) NOT NULL,
+  rideTo character varying(30) NOT NULL,
+  date character varying(20) NOT NULL,
+  depTime character varying(10) NOT NULL,
+  seatsAvailable integer NOT NULL,
+  cost integer NOT NULL
 );
