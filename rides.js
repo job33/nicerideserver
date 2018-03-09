@@ -59,7 +59,7 @@ async function readAll() {
  *
  * @returns {Promise} Promise representing the note object or null if not found
  */
-async function readOne(rideFrom) {
+async function rideSearch(rideFrom) {
   /* todo útfæra */
   const client = new Client({ connectionString });
   await client.connect();
@@ -138,7 +138,7 @@ async function del(date) {
 module.exports = {
   create,
   readAll,
-  readOne,
+  rideSearch,
   update,
   del,
 };
