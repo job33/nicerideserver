@@ -39,10 +39,9 @@ router.post('/', function(req, res, next) {
 
 
 router.get('/rides', async (req, res) => {
-  const { rideFrom } = req.query.rideFrom;
-  const { rideTo } = req.query.rideTo;
+  const { search } = req.query;
 
-  const rows = await rideSearch(rideFrom, rideTo);
+  const rows = await rideSearch(search);
 
   res.send(rows);
 });
