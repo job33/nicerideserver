@@ -37,19 +37,13 @@ router.post('/', function(req, res, next) {
   });
 });
 
-/*
-router.get('/', async (req, res) => {
+
+router.get('/rides', async (req, res) => {
   const { search } = req.query;
 
   const rows = await rideSearch(search);
 
   res.send(rows);
-}); */
-
-router.get('/', function(req, res, next) {
-  rideSearch(req.query).then(function(data) {
-    res.send(data);
-  });
 });
 
 router.put('/:id', function(req, res, next) {
