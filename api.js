@@ -37,9 +37,17 @@ router.post('/', function(req, res, next) {
   });
 });
 
+/*
+router.get('/', async (req, res) => {
+  const { search } = req.query;
+
+  const rows = await rideSearch(search);
+
+  res.send(rows);
+}); */
+
 router.get('/', function(req, res, next) {
-  const { rideFrom } = req.query;
-  rideSearch(rideFrom).then(function(data) {
+  rideSearch(req.query).then(function(data) {
     res.send(data);
   });
 });

@@ -59,7 +59,7 @@ async function readAll() {
  *
  * @returns {Promise} Promise representing the note object or null if not found
  */
-async function rideSearch(rideFrom = '') {
+async function rideSearch(search = '') {
   /* todo útfæra */
   const client = new Client({ connectionString });
   await client.connect();
@@ -70,15 +70,17 @@ async function rideSearch(rideFrom = '') {
       WHERE
         to_tsvector('english', rideFrom) @@ to_tsquery('english', $1)
       `;
-    const result = await client.query(q, [rideFrom]);
+
+    const result = await client.query(q, [search]);
+
     return result.rows;
   } catch (err) {
-    console.error('Error selecting from data');
-    throw err;
-  } finally {
-    await client.end();
+    console.error('Error selecting from data', err);
   }
+
+  await client.end();
 }
+
 
 /**
  * Update a note asynchronously.
