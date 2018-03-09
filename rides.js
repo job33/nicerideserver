@@ -59,7 +59,7 @@ async function readAll() {
  *
  * @returns {Promise} Promise representing the note object or null if not found
  */
-async function rideSearch(rideFrom) {
+async function rideSearch(rideFrom = '') {
   /* todo útfæra */
   const client = new Client({ connectionString });
   await client.connect();
@@ -68,7 +68,7 @@ async function rideSearch(rideFrom) {
     const q = `
       SELECT * FROM Rides
       WHERE
-        rideFrom = $1
+        to_tsvector('english', rideFrom) @@ to_tsquery('english', $1)
       `;
     const result = await client.query(q, [rideFrom]);
     return result.rows;
