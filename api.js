@@ -3,7 +3,7 @@ const express = require('express');
 const {
   create,
   readAll,
-  readOne,
+  rideSearch,
   update,
   del,
 } = require('./rides');
@@ -37,10 +37,12 @@ router.post('/', function(req, res, next) {
   });
 });
 
-router.get('/:rideFrom:rideTo', function(req, res, next) {
-  readOne(req.body.rideFrom, req.body.rideTo).then(function(data) {
-    res.send(data);
-  });
+router.get('/', async (req, res) => {
+  const { search } = req.query;
+
+  const rows = await rideSearch(search);
+
+  res.json(rows);
 });
 
 router.put('/:id', function(req, res, next) {
