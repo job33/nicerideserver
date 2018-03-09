@@ -59,7 +59,7 @@ async function readAll() {
  *
  * @returns {Promise} Promise representing the note object or null if not found
  */
-async function readOne(search = '') {
+async function readOne(rideFrom = '', rideTo = '') {
   /* todo útfæra */
   const client = new Client({ connectionString });
   await client.connect();
@@ -72,7 +72,7 @@ async function readOne(search = '') {
         AND
         rideTo = $2
       `;
-    const result = await client.query(q, [search]);
+    const result = await client.query(q, [rideFrom, rideTo]);
     return result.rows;
   } catch (err) {
     console.error('Error selecting from data');
