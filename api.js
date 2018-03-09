@@ -37,12 +37,11 @@ router.post('/', function(req, res, next) {
   });
 });
 
-router.get('/', async (req, res) => {
+router.get('/', function(req, res, next) {
   const { rideFrom } = req.query;
-
-  const rows = await rideSearch(rideFrom);
-
-  res.json(rows);
+  rideSearch(rideFrom).then(function(data) {
+    res.send(data);
+  });
 });
 
 router.put('/:id', function(req, res, next) {
