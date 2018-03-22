@@ -9,7 +9,8 @@ const {
 } = require('./rides');
 
 const {
-  createUser
+  createUser,
+  login,
 } = require('./users');
 
 const router = express.Router();
@@ -81,21 +82,34 @@ router.delete('/:date', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
   createUser(req.body).then(function(data) {
-    let skil = {
-      username: req.body.username,
-      password: req.body.password,
-      name: req.body.name,
-      phone: req.body.phone,
-      email: req.body.email,
-    };
 
     let newUser = {
+      message: 'Registration successful!',
       username: data[0].username,
       name: data[0].name,
       phone: data[0].phone,
       email: data[0].email,
     }
     res.status(201).send(newUser);
+  });
+});
+
+router.post('/login', function(req, res, next) {
+  login(req.body).then(function(data) {
+    if (data[0].length === 0) {
+      let activeUser = {
+        message: 'Login failed',
+      }
+    } else {
+      let activeUser = {
+        message: 'Login successful!',
+        username: data[0].username,
+        name: data[0].name,
+        phone: data[0].phone,
+        email: data[0].email,
+      }
+      res.status(201).send(activeUser);
+    }
   });
 });
 
