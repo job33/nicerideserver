@@ -103,13 +103,13 @@ router.post('/login', function(req, res, next) {
     console.info("noUser: " + noUser);
     if (noUser) {
       let activeUser = {
-        message: 'Login failed',
+        success: false,
       }
       console.info("activeUser: " + activeUser);
       res.send(activeUser);
     } else {
       let activeUser = {
-        message: 'Login successful!',
+        success: true,
         username: data[0].username,
         name: data[0].name,
         phone: data[0].phone,
