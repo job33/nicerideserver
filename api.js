@@ -96,7 +96,7 @@ router.post('/register', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   login(req.body).then(function(data) {
-    if (data[0] != undefined) {
+    if (data[0] === undefined) {
       let activeUser = {
         message: 'Login failed',
       }
