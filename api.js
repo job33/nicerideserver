@@ -85,7 +85,7 @@ router.post('/register', function(req, res, next) {
   createUser(req.body).then(function(data) {
 
     let newUser = {
-      message: 'Registration successful!',
+      success: true,
       username: data[0].username,
       name: data[0].name,
       phone: data[0].phone,
