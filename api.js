@@ -1,4 +1,5 @@
 const express = require('express');
+const isEmpty = require('is-empty');
 
 const {
   create,
@@ -96,7 +97,7 @@ router.post('/register', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   login(req.body).then(function(data) {
-    if (data === undefined) {
+    if (isEmpty(data[0])) {
       let activeUser = {
         message: 'Login failed',
       }
