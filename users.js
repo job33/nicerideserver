@@ -1,4 +1,5 @@
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
+
 const { Client } = require('pg');
 
 const connectionString = process.env.DATABASE_URL;
@@ -73,7 +74,7 @@ async function createUser(username, password, name, phone, email) {
 
   await client.connect();
 
-  const hashedPassword = await bcrypt.hash(password, 11);
+  // const hashedPassword = await bcrypt.hash(password, 11);
   const q = 'INSERT INTO Users (username, password, name) VALUES ($1, $2, $3) RETURNING *';
 
   const validation = validateUser(username, password, name, phone, email);
@@ -82,7 +83,7 @@ async function createUser(username, password, name, phone, email) {
   }
 
   try {
-    const result = await Client.query(q, [username, hashedPassword, name, phone, email]);
+    const result = await Client.query(q, [username, password, name, phone, email]);
     return result.rows;
   } catch (err) {
     throw err;
