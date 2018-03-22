@@ -80,13 +80,15 @@ router.delete('/:date', function(req, res, next) {
 });
 
 router.post('/register', catchErrors(async (req, res, next) => {
-  const {
-    username,
-    password,
-    name,
-    phone,
-    email,
+  const newUser = {
+    username = '',
+    password = '',
+    name = '',
+    phone = '',
+    email = '',
   } = req.body;
+
+  console.info("User í router: " + newUser);
 
   let result;
 

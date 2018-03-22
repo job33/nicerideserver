@@ -46,30 +46,30 @@ async function checkForEmail(email) {
   }
 }
 
-async function validateUser(username, password, name, phone, email) {
+async function validateUser(newUser) {
 
-  if (username.length < 5) {
+  if (newUser.username.length < 5) {
     return 'Username too short';
   }
 
-  const checkUser = await checkForUser(username);
+  const checkUser = await checkForUser(newUser.username);
   if (checkUser < 0) {
     return 'Username already exists';
   }
 
-  const checkPhone = await checkForPhone(phone);
+  const checkPhone = await checkForPhone(newUser.phone);
   if (checkPhone < 0) {
     return 'Phone-number already exists';
   }
 
-  const checkEmail = await checkForEmail(email);
+  const checkEmail = await checkForEmail(newUser.email);
   if (checkEmail < 0) {
     return 'Email already exists';
   }
   return '';
 }
 
-async function createUser(username, password, name, phone, email) {
+async function createUser(newUser) {
   const client = new Client({ connectionString });
 
   await client.connect();
@@ -77,13 +77,13 @@ async function createUser(username, password, name, phone, email) {
   // const hashedPassword = await bcrypt.hash(password, 11);
   const q = 'INSERT INTO Users (username, password, name) VALUES ($1, $2, $3) RETURNING *';
 
-  const validation = validateUser(username, password, name, phone, email);
+  const validation = validateUser(newUser);
   if (validation.length < 0) {
     return validation;
   }
 
   try {
-    const result = await Client.query(q, [username, password, name, phone, email]);
+    const result = await client.query(q, [newUser.username, newUser.password, newUser.name, newUser.phone, newUser.email]);
     return result.rows;
   } catch (err) {
     throw err;
