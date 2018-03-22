@@ -79,25 +79,17 @@ router.delete('/:date', function(req, res, next) {
   });
 });
 
-router.post('/register', catchErrors(async (req, res, next) => {
-  const newUser = {
-    username = '',
-    password = '',
-    name = '',
-    phone = '',
-    email = '',
-  } = req.body;
-
-  console.info("User í router: " + newUser);
-
-  let result;
-
-  try {
-    result = await createUser(username, password, name, phone, email);
-  } catch (error) {
-    return next(error);
-  }
-  return res.send(result);
-}));
+router.post('/register', function(req, res, next) {
+  createUser(req.body).then(function(data) {
+    let skil = {
+      username: req.body.username,
+      password: req.body.password,
+      name: req.body.name,
+      phone: req.body.phone,
+      email: req.body.email,
+    };
+    res.status(201).send(skil);
+  });
+});
 
 module.exports = router;
