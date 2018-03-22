@@ -99,7 +99,8 @@ router.post('/login', function(req, res, next) {
   login(req.body).then(function(data) {
     console.info("Data: " + data);
     console.info("Data[0]: " + data[0]);
-    if (isEmpty(data)) {
+    const noUser = isEmpty(data[0]);
+    if (noUser) {
       let activeUser = {
         message: 'Login failed',
       }
