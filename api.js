@@ -8,6 +8,10 @@ const {
   del,
 } = require('./rides');
 
+const {
+  createUser
+} = require('./users');
+
 const router = express.Router();
 
 function catchErrors(fn) {
@@ -74,5 +78,24 @@ router.delete('/:date', function(req, res, next) {
     }
   });
 });
+
+router.post('/register', catchErrors(async (req, res, next) => {
+  const {
+    username,
+    password,
+    name,
+    phone,
+    email,
+  } = req.body;
+
+  let result;
+
+  try {
+    result = await createUser(username, password, name, phone, email);
+  } catch (error) {
+    return next(error);
+  }
+  return res.send(result);
+}));
 
 module.exports = router;
