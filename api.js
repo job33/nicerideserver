@@ -88,7 +88,14 @@ router.post('/register', function(req, res, next) {
       phone: req.body.phone,
       email: req.body.email,
     };
-    res.status(201).send(skil);
+
+    let newUser = {
+      username: data[0].username,
+      name: data[0].name,
+      phone: data[0].phone,
+      email: data[0].email,
+    }
+    res.status(201).send(newUser);
   });
 });
 
