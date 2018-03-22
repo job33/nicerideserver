@@ -32,6 +32,7 @@ async function login({ username, password } = {}) {
 
   try {
     const result = await client.query(query, values);
+    console.info(result.rows);
     return result.rows;
   } catch (err) {
     throw err;
