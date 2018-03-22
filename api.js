@@ -105,6 +105,7 @@ router.post('/login', function(req, res, next) {
       let activeUser = {
         message: 'Login failed',
       }
+      res.status(400).send(activeUser);
     } else {
       let activeUser = {
         message: 'Login successful!',
