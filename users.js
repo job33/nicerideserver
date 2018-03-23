@@ -3,9 +3,8 @@ const { Client } = require('pg');
 const connectionString = process.env.DATABASE_URL;
 
 async function createUser({ username, password, name, phone, email } = {}) {
-  /* todo útfæra */
   const client = new Client({ connectionString });
-
+  const data = [];
   await client.connect();
 
   const query = 'INSERT INTO users(username, password, name, phone, email) VALUES($1, $2, $3, $4, $5) RETURNING *';
@@ -13,13 +12,14 @@ async function createUser({ username, password, name, phone, email } = {}) {
 
   try {
     const result = await client.query(query, values);
-    return {
+    data.push({
       success: true,
-      username: result.username,
+      username: result.rows.username,
       name: result.rows.name,
       phone: result.rows.phone,
       email: result.rows.email,
-    };
+    });
+    return data;
   } catch (err) {
     throw err;
   } finally {
