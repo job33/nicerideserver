@@ -95,7 +95,7 @@ router.post('/register', function(req, res, next) {
     console.info('Data[0]: ', data[0]);
     console.info('Data.rows: ', data.rows);
     console.info('Data[0}.rows: ', data[0].rows);
-    res.status(201).send(data[0].rows);
+    res.status(201).send(data);
   });
 });
 
