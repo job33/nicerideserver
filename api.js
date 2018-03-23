@@ -84,14 +84,14 @@ router.delete('/:date', function(req, res, next) {
 router.post('/register', function(req, res, next) {
   createUser(req.body).then(function(data) {
 
-    let newUser = {
+    /*let newUser = {
       success: true,
       username: data[0].username,
       name: data[0].name,
       phone: data[0].phone,
       email: data[0].email,
-    }
-    res.status(201).send(newUser);
+    }*/
+    res.status(201).send(data[0]);
   });
 });
 

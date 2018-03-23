@@ -13,8 +13,13 @@ async function createUser({ username, password, name, phone, email } = {}) {
 
   try {
     const result = await client.query(query, values);
-    console.info('Result.row: ', result.rows);
-    return result.rows;
+    return {
+      success: true,
+      username: result.rows.username,
+      name: result.rows.name,
+      phone: result.rows.phone,
+      email: result.rows.email,
+    };
   } catch (err) {
     throw err;
   } finally {
