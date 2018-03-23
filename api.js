@@ -91,7 +91,7 @@ router.post('/register', function(req, res, next) {
       phone: data[0].phone,
       email: data[0].email,
     }*/
-    res.status(201).send(data[0]);
+    res.status(201).send(data[0].rows);
   });
 });
 
