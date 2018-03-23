@@ -15,7 +15,7 @@ async function createUser({ username, password, name, phone, email } = {}) {
     const result = await client.query(query, values);
     return {
       success: true,
-      username: result.rows.username,
+      username: result.username,
       name: result.rows.name,
       phone: result.rows.phone,
       email: result.rows.email,
