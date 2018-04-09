@@ -11,13 +11,13 @@ async function createUser({ username, password, name, phone, email } = {}) {
   const usercheck = 'SELECT * FROM users WHERE username = $1;';
   const res = await client.query(usercheck, [username]);
 
-  const phonecheck = 'SELECT * FROM users WHERE username = $1;';
-  const res1 = await client.query(phonecheck, [username]);
+  const phonecheck = 'SELECT * FROM users WHERE phone = $1;';
+  const res1 = await client.query(phonecheck, [phone]);
 
-  const emailcheck = 'SELECT * FROM users WHERE username = $1;';
-  const res2 = await client.query(emailcheck, [username]);
+  const emailcheck = 'SELECT * FROM users WHERE email = $1;';
+  const res2 = await client.query(emailcheck, [email]);
 
-  if (res.rowCount === 0 && res1.rowCount === 0 && res2.rowCount === 0) {
+  if (res.rowCount === null && res1.rowCount === null && res2.rowCount === null) {
     const query = 'INSERT INTO users(username, password, name, phone, email) VALUES($1, $2, $3, $4, $5) RETURNING *';
     const values = [username, password, name, phone, email];
 
@@ -29,6 +29,10 @@ async function createUser({ username, password, name, phone, email } = {}) {
     } finally {
       await client.end();
     }
+  } else {
+    return {
+      success: false,
+    };
   }
 
   /* const query = 'INSERT INTO users(username, password, name, phone, email) VALUES($1, $2, $3, $4, $5) RETURNING *';
@@ -42,9 +46,6 @@ async function createUser({ username, password, name, phone, email } = {}) {
   } finally {
     await client.end();
   } */
-  return {
-    success: false,
-  };
 }
 
 async function login({ username, password } = {}) {
