@@ -91,15 +91,17 @@ router.post('/register', function(req, res, next) {
       let newUser = {
         success: false,
       }
-    } else {
+      res.send(newUser);
+    }else{
       let newUser = {
-      success: true,
-      username: data[0].username,
-      name: data[0].name,
-      phone: data[0].phone,
-      email: data[0].email,
-    }}
-    res.status(201).send(newUser);
+        success: true,
+        username: data[0].username,
+        name: data[0].name,
+        phone: data[0].phone,
+        email: data[0].email,
+      }
+      res.status(201).send(newUser);
+    }
   });
 });
 
