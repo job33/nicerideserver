@@ -119,7 +119,8 @@ async function mehRides(username = '') {
  * @returns {Promise} Promise representing the object result of creating the note
  */
 async function update({ id, seatsAvailable } = {}) {
-  /* todo útfæra */
+  console.info("rides id: ", id);
+  console.info("rides SA: ", seatsAvailable);
   const client = new Client({ connectionString });
 
   await client.connect();

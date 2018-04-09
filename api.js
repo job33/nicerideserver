@@ -65,6 +65,8 @@ router.get('/mehrides', async (req, res) => {
 });
 
 router.put('/:id', function(req, res, next) {
+  console.info("req.params.id: ", req.params.id);
+  console.info("seatsAvailable: ", req.body.seatsAvailable);
   update(req.params.id, req.body.seatsAvailable).then(function(data) {
     console.info("data: ", data);
     if(data === 1) {
