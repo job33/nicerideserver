@@ -13,7 +13,6 @@ const connectionString = process.env.DATABASE_URL;
  * @returns {Promise} Promise representing the object result of creating the note
  */
 async function create({ rideFrom, rideTo, date, depTime, seatsAvailable, cost, userName, phone, email } = {}) {
-  /* todo útfæra */
   const client = new Client({ connectionString });
 
   await client.connect();
@@ -59,7 +58,7 @@ async function readAll() {
  *
  * @returns {Promise} Promise representing the note object or null if not found
  */
-async function rideSearch(rideFrom = '', rideTo = '') {
+async function rideSearch(rideFrom = '', rideTo = '', date = '') {
   /* todo útfæra */
   const client = new Client({ connectionString });
   await client.connect();
@@ -71,9 +70,11 @@ async function rideSearch(rideFrom = '', rideTo = '') {
         to_tsvector('english', rideFrom) @@ to_tsquery('english', $1)
         AND
         to_tsvector('english', rideTo) @@ to_tsquery('english', $2)
+        AND
+        to_tsvector('english', date) @@ to_tsquery('english', $3)
       `;
 
-    const result = await client.query(q, [rideFrom, rideTo]);
+    const result = await client.query(q, [rideFrom, rideTo, date]);
 
     return result.rows;
   } catch (err) {
