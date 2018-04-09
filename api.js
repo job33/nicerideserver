@@ -5,6 +5,7 @@ const {
   create,
   readAll,
   rideSearch,
+  mehRides,
   update,
   del,
 } = require('./rides');
@@ -51,6 +52,14 @@ router.get('/rides', async (req, res) => {
   const { rideFrom, rideTo, date } = req.query;
 
   const rows = await rideSearch(rideFrom, rideTo, date);
+
+  res.send(rows);
+});
+
+router.get('/mehrides', async (req, res) => {
+  const { username } = req.query;
+
+  const rows = await mehRides(username);
 
   res.send(rows);
 });

@@ -84,6 +84,28 @@ async function rideSearch(rideFrom = '', rideTo = '', date = '') {
   await client.end();
 }
 
+async function mehRides(phone = '') {
+  /* todo útfæra */
+  const client = new Client({ connectionString });
+  await client.connect();
+
+  try {
+    const q = `
+      SELECT * FROM Rides
+      WHERE
+        to_tsvector('english', phone) @@ to_tsquery('english', $1)
+      `;
+
+    const result = await client.query(q, [phone]);
+
+    return result.rows;
+  } catch (err) {
+    console.error('Error selecting from data', err);
+  }
+
+  await client.end();
+}
+
 
 /**
  * Update a note asynchronously.
@@ -144,6 +166,7 @@ module.exports = {
   create,
   readAll,
   rideSearch,
+  mehRides,
   update,
   del,
 };
