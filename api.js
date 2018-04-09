@@ -88,8 +88,7 @@ router.post('/register', function(req, res, next) {
   createUser(req.body).then(function(data) {
     console.info("data0: ", data[0]);
     console.info("data ", data);
-    const noUser = isEmpty(data[0]);
-    if(noUser) {
+    if(data === null) {
       let activeUser = {
         success: false,
       }
