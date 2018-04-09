@@ -129,6 +129,8 @@ async function update({ id, seatsAvailable } = {}) {
 
   try {
     const result = await client.query(query, values);
+    console.info("result: ", result);
+    console.info("result.rowcount: ", result.rowCount);
     return result.rowCount;
   } catch (err) {
     throw err;

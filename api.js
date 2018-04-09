@@ -66,6 +66,7 @@ router.get('/mehrides', async (req, res) => {
 
 router.put('/:id', function(req, res, next) {
   update(req.params.id, req.body.seatsAvailable).then(function(data) {
+    console.info("data: ", data);
     if(data === 1) {
       let skil = {
         id: data[0].id,
