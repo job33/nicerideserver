@@ -128,6 +128,8 @@ async function update(ride, id) {
     id,
   ];
 
+  console.info('dafasdfa: ', data);
+
   const pstring = `
     UPDATE rides SET 
     seatsAvailable = $1,
