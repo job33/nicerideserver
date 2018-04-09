@@ -86,7 +86,6 @@ router.delete('/:date', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
   createUser(req.body).then(function(data) {
-    console.info("data0: ", data[0]);
     console.info("data ", data);
     if(data === null) {
       let activeUser = {
