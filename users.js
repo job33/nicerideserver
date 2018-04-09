@@ -30,9 +30,7 @@ async function createUser({ username, password, name, phone, email } = {}) {
       await client.end();
     }
   } else {
-    return {
-      success: false,
-    };
+    return null;
   }
 
   /* const query = 'INSERT INTO users(username, password, name, phone, email) VALUES($1, $2, $3, $4, $5) RETURNING *';
