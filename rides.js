@@ -133,7 +133,7 @@ async function update(ride, id) {
 
   const pstring = `
     UPDATE rides SET 
-    seatsAvailable = $1,
+    seatsAvailable = $1
     WHERE id = $2 
     RETURNING *;
     `;
