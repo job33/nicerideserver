@@ -84,7 +84,7 @@ async function rideSearch(rideFrom = '', rideTo = '', date = '') {
   await client.end();
 }
 
-async function mehRides(phone = '') {
+async function mehRides(username = '') {
   /* todo útfæra */
   const client = new Client({ connectionString });
   await client.connect();
@@ -93,10 +93,10 @@ async function mehRides(phone = '') {
     const q = `
       SELECT * FROM Rides
       WHERE
-        to_tsvector('english', phone) @@ to_tsquery('english', $1)
+        to_tsvector('english', username) @@ to_tsquery('english', $1)
       `;
 
-    const result = await client.query(q, [phone]);
+    const result = await client.query(q, [username]);
 
     return result.rows;
   } catch (err) {
