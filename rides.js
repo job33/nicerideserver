@@ -124,7 +124,7 @@ async function update({ id, seatsAvailable } = {}) {
 
   await client.connect();
 
-  const query = 'UPDATE rides SET seatsAvailable = $2 WHERE id = ($1)';
+  const query = 'UPDATE rides SET seatsAvailable = $2 WHERE id = ($1) RETURNING id';
   const values = [id, seatsAvailable];
 
   try {
