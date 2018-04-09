@@ -118,14 +118,14 @@ async function mehRides(username = '') {
  *
  * @returns {Promise} Promise representing the object result of creating the note
  */
-async function update(id, { rideFrom, rideTo, date, depTime, seatsAvailable, cost } = {}) {
+async function update({ id, seatsAvailable } = {}) {
   /* todo útfæra */
   const client = new Client({ connectionString });
 
   await client.connect();
 
-  const query = 'UPDATE rides SET rideFrom = ($7), rideTo = ($6), date = ($5), depTime = ($4), seatsAvailable = ($3), cost = ($2), WHERE id = ($1)';
-  const values = [id, cost, seatsAvailable, depTime, date, rideTo, rideFrom];
+  const query = 'UPDATE rides SET seatsAvailable = $2 WHERE id = ($1)';
+  const values = [id, seatsAvailable];
 
   try {
     const result = await client.query(query, values);

@@ -65,7 +65,7 @@ router.get('/mehrides', async (req, res) => {
 });
 
 router.put('/:id', function(req, res, next) {
-  update(req.params.id, req.body).then(function(data) {
+  update(req.params.id, req.body.seatsAvailable).then(function(data) {
     if(data === 1) {
       let skil = {
         id: data[0].id,
@@ -74,7 +74,10 @@ router.put('/:id', function(req, res, next) {
         date: req.body.date,
         depTime: req.body.depTime,
         seatsAvailable: req.body.seatsAvailable,
-        cost: req.body.cost
+        cost: req.body.cost,
+        userName: req.body.userName,
+        phone: req.body.phone,
+        email: req.body.email,
       };
       res.status(201).send(skil);
     } else {
