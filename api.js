@@ -88,17 +88,17 @@ router.post('/register', function(req, res, next) {
   createUser(req.body).then(function(data) {
     console.info("data ", data);
     if(data === null) {
-      let activeUser = {
+      let newUser = {
         success: false,
       }
-    }
-    let newUser = {
+    } else {
+      let newUser = {
       success: true,
       username: data[0].username,
       name: data[0].name,
       phone: data[0].phone,
       email: data[0].email,
-    }
+    }}
     res.status(201).send(newUser);
   });
 });
