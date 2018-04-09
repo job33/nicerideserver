@@ -86,7 +86,10 @@ router.delete('/:date', function(req, res, next) {
 
 router.post('/register', function(req, res, next) {
   createUser(req.body).then(function(data) {
-
+    console.info("data0: ", data[0]);
+    if (!(data[0].success)) {
+      res.status(201).send(data[0]);
+    }
     let newUser = {
       success: true,
       username: data[0].username,
