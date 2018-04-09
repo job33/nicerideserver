@@ -64,30 +64,34 @@ router.get('/mehrides', async (req, res) => {
   res.send(rows);
 });
 
-router.put('/:id', function(req, res, next) {
-  console.info("req.params.id: ", req.params.id);
-  console.info("seatsAvailable: ", req.body.seatsAvailable);
-  update(req.params.id, req.body.seatsAvailable).then(function(data) {
-    console.info("data: ", data);
-    if(data === 1) {
-      let skil = {
-        id: data[0].id,
-        rideFrom: req.body.rideFrom,
-        rideTo: req.body.rideTo,
-        date: req.body.date,
-        depTime: req.body.depTime,
-        seatsAvailable: req.body.seatsAvailable,
-        cost: req.body.cost,
-        userName: req.body.userName,
-        phone: req.body.phone,
-        email: req.body.email,
-      };
-      res.status(201).send(skil);
-    } else {
-      res.status(404).send("error: not found");
-    }
-  });
-});
+router.patch('/:id', catchErrors(async (req, res, next) => {
+  const { id } = req.params;
+  const ride = {
+    rideFrom = '',
+    rideTo = '',
+    date = '',
+    depTime = '',
+    seatsAvailable,
+    cost = '',
+    userName = '',
+    phone = '',
+    email = '',
+  } = req.body;
+
+  let result;
+
+  try {
+    result = await update(ride, id);
+  } catch (error) {
+    return next(error);
+  }
+  if (!result.success) {
+    return res.status(201).json({
+      success: false,
+    });
+  }
+  return res.send(result.item);
+}));
 
 router.delete('/:date', function(req, res, next) {
   del(req.body.date).then(function(data) {
