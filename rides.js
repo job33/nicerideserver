@@ -12,14 +12,14 @@ const connectionString = process.env.DATABASE_URL;
  *
  * @returns {Promise} Promise representing the object result of creating the note
  */
-async function create({ rideFrom, rideTo, date, depTime, seatsAvailable, cost } = {}) {
+async function create({ rideFrom, rideTo, date, depTime, seatsAvailable, cost, userName, phone, email } = {}) {
   /* todo útfæra */
   const client = new Client({ connectionString });
 
   await client.connect();
 
-  const query = 'INSERT INTO rides(rideFrom, rideTo, date, depTime, seatsAvailable, cost) VALUES($1, $2, $3, $4, $5, $6) RETURNING id';
-  const values = [rideFrom, rideTo, date, depTime, seatsAvailable, cost];
+  const query = 'INSERT INTO rides(rideFrom, rideTo, date, depTime, seatsAvailable, cost, userName, phone, email) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id';
+  const values = [rideFrom, rideTo, date, depTime, seatsAvailable, cost, userName, phone, email];
 
   try {
     const result = await client.query(query, values);

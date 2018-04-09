@@ -37,7 +37,10 @@ router.post('/', function(req, res, next) {
       date: req.body.date,
       depTime: req.body.depTime,
       seatsAvailable: req.body.seatsAvailable,
-      cost: req.body.cost
+      cost: req.body.cost,
+      userName: req.body.userName,
+      phone: req.body.phone,
+      email: req.body.email
     };
     res.status(201).send(skil);
   });
