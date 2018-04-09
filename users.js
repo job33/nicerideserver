@@ -17,7 +17,7 @@ async function createUser({ username, password, name, phone, email } = {}) {
   const emailcheck = 'SELECT * FROM users WHERE email = $1;';
   const res2 = await client.query(emailcheck, [email]);
 
-  if (res.rowCount === null && res1.rowCount === null && res2.rowCount === null) {
+  if (res.rowCount === 0 && res1.rowCount === 0 && res2.rowCount === 0) {
     const query = 'INSERT INTO users(username, password, name, phone, email) VALUES($1, $2, $3, $4, $5) RETURNING *';
     const values = [username, password, name, phone, email];
 
