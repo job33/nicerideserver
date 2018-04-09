@@ -1,3 +1,5 @@
+import { parse } from 'path';
+
 const { Client } = require('pg');
 
 const connectionString = process.env.DATABASE_URL;
@@ -123,9 +125,10 @@ async function update(ride, id) {
   const client = new Client({ connectionString });
   await client.connect();
 
+  const realId = parseInt(id, 10);
   const data = [
     ride.seatsAvailable,
-    id,
+    realId,
   ];
 
   console.info('dafasdfa: ', data);
