@@ -103,7 +103,11 @@ router.delete('/:id', catchErrors(async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
-  console.info('result: ', result);
+  if (result === 0) {
+    return res.json({
+      success: false,
+    });
+  }
   return res.status(201).json({
     success: true,
   });
