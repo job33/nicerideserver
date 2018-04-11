@@ -64,7 +64,6 @@ router.get('/mehrides', async (req, res) => {
   res.send(rows);
 });
 
-router.patch('/:id', catchErrors(async (req, res, next) => {
   const { id } = req.params;
   const ride = {
     rideFrom = '',
