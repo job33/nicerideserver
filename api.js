@@ -93,14 +93,8 @@ router.patch('/:id', catchErrors(async (req, res, next) => {
   return res.send(result.item);
 }));
 
-router.delete('/:date', function(req, res, next) {
-  del(req.body.date).then(function(data) {
-    if(data === 1) {
-      res.status(204).send();
-    } else {
-      res.status(404).send("error: not found");
-    }
-  });
+router.delete('/id', function(req, res, next) {
+
 });
 
 router.post('/register', function(req, res, next) {

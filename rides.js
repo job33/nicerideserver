@@ -141,6 +141,11 @@ async function update(ride, id) {
   try {
     const result = await client.query(pstring, data);
 
+    if (result.rowCount === 0) {
+      return {
+        success: false,
+      };
+    }
     return {
       success: true,
       validation: [],
