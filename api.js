@@ -93,7 +93,7 @@ router.patch('/:id', catchErrors(async (req, res, next) => {
   return res.send(result.item);
 }));
 
-router.delete('/id', catchErrors(async (req, res, next) => {
+router.delete('/:id', catchErrors(async (req, res, next) => {
   const { id } = req.params;
   console.info('id', id);
   let result;
