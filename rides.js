@@ -166,16 +166,17 @@ async function update(ride, id) {
  *
  * @returns {Promise} Promise representing the boolean result of creating the note
  */
-async function del(date) {
+async function del(id) {
   const client = new Client({ connectionString });
 
   await client.connect();
 
-  const query = 'DELETE FROM rides WHERE date = ($1)';
-  const values = [date];
+  const query = 'DELETE FROM rides WHERE id = ($1)';
+  const values = [id];
 
   try {
     const result = await client.query(query, values);
+    console.info('rowcount: ', result.rowCount);
     return result.rowCount;
   } catch (err) {
     throw err;

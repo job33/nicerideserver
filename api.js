@@ -93,9 +93,20 @@ router.patch('/:id', catchErrors(async (req, res, next) => {
   return res.send(result.item);
 }));
 
-router.delete('/id', function(req, res, next) {
+router.delete('/id', catchErrors(async (req, res, next) => {
+  const { id } = req.params;
+  let result;
 
-});
+  try {
+    result = await del(id);
+  } catch (error) {
+    return next(error);
+  }
+  console.info('result: ', result);
+  return res.status(201).json({
+    success: true,
+  });
+}));
 
 router.post('/register', function(req, res, next) {
   createUser(req.body).then(function(data) {
