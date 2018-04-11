@@ -95,6 +95,7 @@ router.patch('/:id', catchErrors(async (req, res, next) => {
 
 router.delete('/id', catchErrors(async (req, res, next) => {
   const { id } = req.params;
+  console.info('id', id);
   let result;
 
   try {
