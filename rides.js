@@ -79,9 +79,9 @@ async function rideSearch(rideFrom = '', rideTo = '', date = '') {
     return result.rows;
   } catch (err) {
     console.error('Error selecting from data', err);
+  } finally {
+    await client.end();
   }
-
-  await client.end();
 }
 
 async function mehRides(username = '') {
@@ -101,9 +101,9 @@ async function mehRides(username = '') {
     return result.rows;
   } catch (err) {
     console.error('Error selecting from data', err);
+  } finally {
+    await client.end();
   }
-
-  await client.end();
 }
 
 
